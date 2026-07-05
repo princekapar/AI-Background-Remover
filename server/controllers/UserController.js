@@ -9,14 +9,14 @@ const clerkWebhooks = async (req, res) => {
 
     try {
         
-        // create a Sivex instance with clerk webhook secret
+        // create a Svix instance with clerk webhook secret
 
         const whook = new webhook({ secret: process.env.CLERK_WEBHOOK_SECRET });
 
         await whook.verify(JSON.stringify(req.body), {
-            "sivx-id": req.headers["sivx-id"],
-            "sivx-timestamp": req.headers["sivx-timestamp"],
-            "sivx-signature": req.headers["sivx-signature"]
+            "svix-id": req.headers["svix-id"],
+            "svix-timestamp": req.headers["svix-timestamp"],
+            "svix-signature": req.headers["svix-signature"]
         })
 
         const { data, type } = req.body;
@@ -26,7 +26,7 @@ const clerkWebhooks = async (req, res) => {
 
                 const userData = {
                     clerkId: data.id,
-                    email: data.email_addresses[0].email_addresses,
+                    email: data.email_addresses[0].email_address,
                     firstName: data.first_name,
                     lastName: data.last_name,
                     photo:data.image_url
@@ -41,7 +41,7 @@ const clerkWebhooks = async (req, res) => {
             case "user.updated": { 
 
                 const userData = {
-                    email: data.email_addresses[0].email_addresses,
+                    email: data.email_addresses[0].email_address,
                     firstName: data.first_name,
                     lastName: data.last_name,
                     photo:data.image_url
