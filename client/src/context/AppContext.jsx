@@ -46,7 +46,7 @@ const {openSignIn} = useClerk();
         setImage(image)
         setResultImgae(false)
 
-     // navigate('/result')
+     navigate('/result')
       
 
       const token = await getToken()
@@ -60,12 +60,12 @@ const {openSignIn} = useClerk();
       
       if (data.success) {
         setResultImgae(data.resultImage)
-        data.creditbalance && setCredit(data.creditbalance)
+        data.creditBalance && setCredit(data.creditBalance)
 
-         navigate("/result");
+      //   navigate("/result");
       } else {
         toast.error(data.message)
-        data.creditbalance && setCredit(data.creditbalance)
+        data.creditBalance && setCredit(data.creditBalance)
 
          if (data.creditBalance <= 0) {
            navigate("/Buy-Credit");
